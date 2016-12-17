@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>LeetCode 111 Minimum Depth of Binary Tree</title>
+    <meta name="description" content="Given a binary tree, find its minimum depth.">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://localhost:4000/2016/12/17/lc-111-minimum-depth/">
+    <link rel="alternate" type="application/rss+xml" title="DreamArk" href="http://localhost:4000/feed.xml ">
+
+
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">DreamArk</a>
+        <small>MSIT-SE Student in CMU</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>Collections
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>LeetCode 111 Minimum Depth of Binary Tree</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-12-17
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>氯甲烷
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#LeetCode" title="Category: LeetCode" rel="category">LeetCode</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#LeetCode" title="Tag: LeetCode" rel="tag">LeetCode</a-->
+        <a href="/tag/#LeetCode" title="Tag: LeetCode" rel="tag">LeetCode</a>&nbsp;
+    
+        <!--a href="/tag/#Array" title="Tag: Array" rel="tag">Array</a-->
+        <a href="/tag/#Array" title="Tag: Array" rel="tag">Array</a>&nbsp;
+    
+        <!--a href="/tag/#Traverse" title="Tag: Traverse" rel="tag">Traverse</a-->
+        <a href="/tag/#Traverse" title="Tag: Traverse" rel="tag">Traverse</a>&nbsp;
+    
+        <!--a href="/tag/#Tree" title="Tag: Tree" rel="tag">Tree</a-->
+        <a href="/tag/#Tree" title="Tag: Tree" rel="tag">Tree</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#111-minimum-depth-of-binary-tree" id="markdown-toc-111-minimum-depth-of-binary-tree">111 Minimum Depth of Binary Tree</a>    <ul>
+      <li><a href="#ruby-how-to-find-the-min-of-two-value" id="markdown-toc-ruby-how-to-find-the-min-of-two-value">Ruby how to find the min of two value</a></li>
+      <li><a href="#second-draft" id="markdown-toc-second-draft">Second draft</a></li>
+      <li><a href="#other-methods-non-recurive" id="markdown-toc-other-methods-non-recurive">Other methods: non-recurive</a></li>
+      <li><a href="#methods-from-discuss" id="markdown-toc-methods-from-discuss">Methods from discuss</a>        <ul>
+          <li><a href="#method-1level-order-traversal" id="markdown-toc-method-1level-order-traversal">Method 1:level-order traversal</a>            <ul>
+              <li><a href="#way-1-use-a-magic-node-as-a-sign" id="markdown-toc-way-1-use-a-magic-node-as-a-sign">Way 1: use a magic node as a sign</a></li>
+              <li><a href="#way-2--use-two-quene-instead-of-magical-node" id="markdown-toc-way-2--use-two-quene-instead-of-magical-node">Way 2 : use two quene instead of magical node</a>                <ul>
+                  <li><a href="#first-java-style" id="markdown-toc-first-java-style"><strong>First, java style</strong></a></li>
+                  <li><a href="#second-ruby-stylelike-python-turple" id="markdown-toc-second-ruby-stylelike-python-turple"><strong>Second, ruby style</strong>(like Python Turple)</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#mehtod-2" id="markdown-toc-mehtod-2">Mehtod 2</a></li>
+        </ul>
+      </li>
+      <li><a href="#methods-from-leetcode" id="markdown-toc-methods-from-leetcode">Methods from LeetCode</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Given a binary tree, find its minimum depth.</p>
+
+<p><img src="http://www.favicon.cc/logo3d/818131.png" alt="" /></p>
+
+<h1 id="111-minimum-depth-of-binary-tree">111 Minimum Depth of Binary Tree</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+</code></pre>
+</div>
+
+<p>My first draft:</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Definition for a binary tree node.</span>
+<span class="c1"># class TreeNode</span>
+<span class="c1">#     attr_accessor :val, :left, :right</span>
+<span class="c1">#     def initialize(val)</span>
+<span class="c1">#         @val = val</span>
+<span class="c1">#         @left, @right = nil, nil</span>
+<span class="c1">#     end</span>
+<span class="c1"># end</span>
+
+<span class="c1"># @param {TreeNode} root</span>
+<span class="c1"># @return {Integer}</span>
+<span class="k">def</span> <span class="nf">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">root</span><span class="p">.</span><span class="nf">nil?</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="mi">0</span>
+  <span class="k">end</span>
+  <span class="k">if</span> <span class="n">root</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="mi">0</span>
+  <span class="k">end</span>
+  <span class="n">left_depth</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="n">right_depth</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="k">unless</span> <span class="n">root</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span> <span class="k">then</span>
+    <span class="n">left_depth</span> <span class="o">=</span> <span class="n">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="nf">left</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="k">unless</span> <span class="n">root</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span> <span class="k">then</span>
+    <span class="n">right_depth</span> <span class="o">=</span> <span class="n">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="nf">right</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="k">if</span> <span class="n">left_depth</span> <span class="o">==</span> <span class="kp">nil</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="n">right_depth</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">elsif</span> <span class="n">right_depth</span> <span class="o">==</span> <span class="kp">nil</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="n">left_depth</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="n">left_depth</span> <span class="o">&gt;</span> <span class="n">right_depth</span> <span class="p">?</span> <span class="p">(</span><span class="n">left_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="n">right_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h2 id="ruby-how-to-find-the-min-of-two-value">Ruby how to find the min of two value</h2>
+
+<p>Just use Array: <code class="highlighter-rouge">[a,b].min</code>, that’s increditable</p>
+
+<p>cited from <a href="http://archive.railsforum.com/viewtopic.php?id=37532">forum</a></p>
+
+<h2 id="second-draft">Second draft</h2>
+
+<p>cited from <a href="http://blog.csdn.net/linhuanmars/article/details/19660209">blog</a></p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Definition for a binary tree node.</span>
+<span class="c1"># class TreeNode</span>
+<span class="c1">#     attr_accessor :val, :left, :right</span>
+<span class="c1">#     def initialize(val)</span>
+<span class="c1">#         @val = val</span>
+<span class="c1">#         @left, @right = nil, nil</span>
+<span class="c1">#     end</span>
+<span class="c1"># end</span>
+
+<span class="c1"># @param {TreeNode} root</span>
+<span class="c1"># @return {Integer}</span>
+<span class="k">def</span> <span class="nf">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">root</span><span class="p">.</span><span class="nf">nil?</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="mi">0</span>
+  <span class="k">end</span>
+  <span class="k">if</span> <span class="n">root</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="nf">right</span><span class="p">)</span>
+  <span class="k">end</span>
+  <span class="k">if</span> <span class="n">root</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span> <span class="k">then</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="nf">left</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">return</span> <span class="p">[</span><span class="n">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="nf">left</span><span class="p">),</span><span class="n">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="nf">right</span><span class="p">)].</span><span class="nf">min</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h2 id="other-methods-non-recurive">Other methods: non-recurive</h2>
+<p>It was too slow, so there must be other alters for this problem or BFS</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Definition for a binary tree node.</span>
+<span class="c1"># class TreeNode</span>
+<span class="c1">#     attr_accessor :val, :left, :right</span>
+<span class="c1">#     def initialize(val)</span>
+<span class="c1">#         @val = val</span>
+<span class="c1">#         @left, @right = nil, nil</span>
+<span class="c1">#     end</span>
+<span class="c1"># end</span>
+
+<span class="c1"># @param {TreeNode} root</span>
+<span class="c1"># @return {Integer}</span>
+<span class="k">def</span> <span class="nf">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+  <span class="n">dpt</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">root</span>
+  <span class="k">while</span> <span class="n">q</span><span class="p">.</span><span class="nf">size!</span><span class="o">=</span><span class="mi">0</span> <span class="k">do</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">shift</span>
+    <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span> <span class="k">unless</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span>
+    <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span> <span class="k">unless</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span>
+    
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>That’s terriable, it is just a method to level order traverse. But I cannot calculate the level num.</p>
+
+<h2 id="methods-from-discuss">Methods from discuss</h2>
+
+<h3 id="method-1level-order-traversal">Method 1:level-order traversal</h3>
+<p>Ooooooooooooooh! Level-order traversal, I am foolish. Just add a tag in the quene, we can discern the sign of entering next level.</p>
+
+<h4 id="way-1-use-a-magic-node-as-a-sign">Way 1: use a magic node as a sign</h4>
+
+<p>The answer cited from <a href="https://discuss.leetcode.com/topic/1948/my-solution-used-level-order-traversal">this post</a>.</p>
+
+<p>I translate the code into Ruby code, as following:</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+  <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">root</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="n">dpt</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="n">sign_node</span> <span class="o">=</span> <span class="no">TreeNode</span><span class="p">.</span><span class="nf">new</span> <span class="o">-</span><span class="mi">999</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">root</span>
+  <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">sign_node</span> <span class="c1"># used for determine if we enter next level</span>
+  <span class="k">while</span> <span class="n">q</span><span class="p">.</span><span class="nf">size</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">do</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">shift</span>
+    <span class="k">if</span> <span class="n">node</span> <span class="o">!=</span> <span class="n">sign_node</span>
+      <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span> <span class="k">unless</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span>
+      <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span> <span class="k">unless</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span>
+      <span class="k">if</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span>
+        <span class="k">return</span> <span class="n">dpt</span>
+      <span class="k">end</span>
+    <span class="k">else</span>
+      <span class="k">if</span> <span class="n">q</span><span class="p">.</span><span class="nf">size</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="n">dpt</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">sign_node</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>Runtime 100ms…Are u kidding me…But it’s ruby</p>
+
+<p><em>** 注意返回条件，并不是取每行最后的node返回，而是用第一个没有儿子的node **</em></p>
+
+<p><code class="highlighter-rouge">This refers to our methods of solving problem, the thought</code></p>
+
+<h4 id="way-2--use-two-quene-instead-of-magical-node">Way 2 : use two quene instead of magical node</h4>
+
+<p>i’m tired in this problem, so I decide to write down right now</p>
+
+<h5 id="first-java-style"><strong>First, java style</strong></h5>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+  <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">root</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="n">dpt</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="n">sign_node</span> <span class="o">=</span> <span class="no">TreeNode</span><span class="p">.</span><span class="nf">new</span> <span class="o">-</span><span class="mi">999</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">dq</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">root</span>
+  <span class="n">dq</span><span class="p">.</span><span class="nf">push</span> <span class="mi">1</span>
+  <span class="k">while</span> <span class="n">q</span><span class="p">.</span><span class="nf">size</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">do</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">shift</span>
+    <span class="n">cur_dpt</span> <span class="o">=</span> <span class="n">dq</span><span class="p">.</span><span class="nf">shift</span>
+    
+    <span class="k">if</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span>
+      <span class="k">return</span> <span class="n">cur_dpt</span>
+    <span class="k">end</span>
+    <span class="k">unless</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span>
+      <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span>
+      <span class="n">dq</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_dpt</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">end</span>
+    <span class="k">unless</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span>
+      <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span>
+      <span class="n">dq</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_dpt</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre>
+</div>
+<p>This method runtime 94ms…</p>
+
+<h5 id="second-ruby-stylelike-python-turple"><strong>Second, ruby style</strong>(like Python Turple)</h5>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">min_depth</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+  <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">root</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="p">[</span><span class="n">root</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+  <span class="k">while</span> <span class="n">q</span><span class="p">.</span><span class="nf">size</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">do</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">shift</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">cur_dpt</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span>
+      <span class="k">return</span> <span class="n">cur_dpt</span>
+    <span class="k">end</span>
+    <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="p">[</span><span class="n">node</span><span class="p">.</span><span class="nf">left</span><span class="p">,</span><span class="n">cur_dpt</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">unless</span> <span class="n">node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span>
+    <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="p">[</span><span class="n">node</span><span class="p">.</span><span class="nf">right</span><span class="p">,</span><span class="n">cur_dpt</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">unless</span> <span class="n">node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h3 id="mehtod-2">Mehtod 2</h3>
+
+<h2 id="methods-from-leetcode">Methods from LeetCode</h2>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-344-reverse-string/">LeetCode 344 Reverse String
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-27-remove-element/">LeetCode 27 Remove Element
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-26-remove-duplicates/">LeetCode 26 Remove Duplicates from Sorted Array
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-102-level-traversal/">LeetCode 102 Binary Tree Level Order Traversal
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/algo-level-traversal-tree/">Level-order Traverse Binary Tree
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/12/17/lc-102-level-traversal/">LeetCode 102 Binary Tree Level Order Traversal</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2016/12/17/lc-26-remove-duplicates/">LeetCode 26 Remove Duplicates from Sorted Array</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function() {
+        this.page.url = 'http://localhost:4000/2016/12/17/lc-111-minimum-depth/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://localhost:4000/2016/12/17/lc-111-minimum-depth/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+
+        s.src = '//dreamark.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+             Sapere Aude 
+        </p>
+        <br>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/LittleNoah" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:jiaweili_cmu@outlook.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+        </p>
+        <!-- <p>本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次</p> -->
+        
+        <p class="power">
+            <span>
+                Powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Modified from Theme <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" class="scroll">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/scroll.min.js " charset="utf-8"></script>
+  </body>
+
+</html>

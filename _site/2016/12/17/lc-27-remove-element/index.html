@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>LeetCode 27 Remove Element</title>
+    <meta name="description" content="LeetCode 27 Remove Element">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://localhost:4000/2016/12/17/lc-27-remove-element/">
+    <link rel="alternate" type="application/rss+xml" title="DreamArk" href="http://localhost:4000/feed.xml ">
+
+
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">DreamArk</a>
+        <small>MSIT-SE Student in CMU</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>Collections
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>LeetCode 27 Remove Element</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-12-17
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>氯甲烷
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#LeetCode" title="Category: LeetCode" rel="category">LeetCode</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#LeetCode" title="Tag: LeetCode" rel="tag">LeetCode</a-->
+        <a href="/tag/#LeetCode" title="Tag: LeetCode" rel="tag">LeetCode</a>&nbsp;
+    
+        <!--a href="/tag/#Array" title="Tag: Array" rel="tag">Array</a-->
+        <a href="/tag/#Array" title="Tag: Array" rel="tag">Array</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#27-remove-element" id="markdown-toc-27-remove-element">27 Remove Element</a>    <ul>
+      <li><a href="#arraydelete" id="markdown-toc-arraydelete">Array.Delete</a></li>
+      <li><a href="#参考delete的源码" id="markdown-toc-参考delete的源码">参考Delete的源码</a></li>
+      <li><a href="#处理rare-value的更efficient的方法" id="markdown-toc-处理rare-value的更efficient的方法">处理Rare Value的更efficient的方法</a></li>
+      <li><a href="#终极疑问" id="markdown-toc-终极疑问">终极疑问</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>LeetCode 27 Remove Element</p>
+
+<p><img src="http://www.favicon.cc/logo3d/818131.png" alt="" /></p>
+
+<h1 id="27-remove-element">27 Remove Element</h1>
+
+<h2 id="arraydelete">Array.Delete</h2>
+<p>使用Ruby的话，可以用无脑Array.delete val方法，方法示例如下，返回找到的最后一个值或者nil或者自定义块</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span> <span class="p">]</span>
+<span class="n">a</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="s2">"b"</span><span class="p">)</span>                   <span class="c1">#=&gt; "b"</span>
+<span class="n">a</span>                               <span class="c1">#=&gt; ["a", "c"]</span>
+<span class="n">a</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="s2">"z"</span><span class="p">)</span>                   <span class="c1">#=&gt; nil</span>
+<span class="n">a</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="s2">"z"</span><span class="p">)</span> <span class="p">{</span> <span class="s2">"not found"</span> <span class="p">}</span>   <span class="c1">#=&gt; "not found"</span>
+</code></pre>
+</div>
+
+<p>So the simpliest solution:</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># @param {Integer[]} nums</span>
+<span class="c1"># @param {Integer} val</span>
+<span class="c1"># @return {Integer}</span>
+<span class="k">def</span> <span class="nf">remove_element</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="n">nums</span><span class="p">.</span><span class="nf">delete</span> <span class="n">val</span>
+    <span class="n">nums</span><span class="p">.</span><span class="nf">size</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h2 id="参考delete的源码">参考Delete的源码</h2>
+<p>但是这样速度非常慢，根据lc给出的结果来看呢，还是比某些孩子的方法快…我们可以看下一下Ruby的delete的源码是怎么实现的</p>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">VALUE</span>
+<span class="nf">rb_ary_delete</span><span class="p">(</span><span class="n">VALUE</span> <span class="n">ary</span><span class="p">,</span> <span class="n">VALUE</span> <span class="n">item</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">VALUE</span> <span class="n">v</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i1</span> <span class="o">=</span> <span class="n">i2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="n">RARRAY_LEN</span><span class="p">(</span><span class="n">ary</span><span class="p">);</span> <span class="n">i1</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">VALUE</span> <span class="n">e</span> <span class="o">=</span> <span class="n">RARRAY_AREF</span><span class="p">(</span><span class="n">ary</span><span class="p">,</span> <span class="n">i1</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">rb_equal</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">item</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="p">;</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i1</span> <span class="o">!=</span> <span class="n">i2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rb_ary_store</span><span class="p">(</span><span class="n">ary</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">i2</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">RARRAY_LEN</span><span class="p">(</span><span class="n">ary</span><span class="p">)</span> <span class="o">==</span> <span class="n">i2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">rb_block_given_p</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">rb_yield</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">Qnil</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">ary_resize_smaller</span><span class="p">(</span><span class="n">ary</span><span class="p">,</span> <span class="n">i2</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">v</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+<p>可以看出，返回值类型是VALUE，传入array和要delete的item。</p>
+
+<p>这里让e等于i1所指的变量的值，v等于item的值，如果e就是item，那么让v等于e并continue.</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">rb_ary_store</span><span class="p">(</span><span class="n">ary</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">e</span><span class="p">);</span>
+</code></pre>
+</div>
+<p>这行相当于<code class="highlighter-rouge">ary[i2] = e</code> ， 所以这里的意思是当有跳过的元素的时候i2始终是走的慢的”<strong>指针</strong>“，而每次不管是continue或者自然结束for，i1都会自增1，i2只有在不是要删除的item的情况下才会自增。</p>
+
+<p>当出现了<code class="highlighter-rouge">i1 != i2</code>的情况的时候，我们就把e当前的值复制到i2所指的位置上去，i2所指的位置，始终比i1慢，或者就是要删除的元素的位置。而要复制的e肯定不会是要删除的元素，这样就相当于把item删除了。一直到i1走到末尾时，利用i2已经将除item以外的所有元素复制了一遍。</p>
+
+<p>最后，判断<code class="highlighter-rouge">RARRAY_LEN(ary) == i2</code>的话，说明一个item都没找到，return nil。否则会利用<code class="highlighter-rouge">ary_resize_smaller(ary,i2)</code>函数重新设置Array的长度，这里就先不找源码了。</p>
+
+<p>其实Ruby的delete实现思想就和LeetCode给出的解法是一样的，我们先照这个写一段代码试试</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># @param {Integer[]} nums</span>
+<span class="c1"># @param {Integer} val</span>
+<span class="c1"># @return {Integer}</span>
+<span class="k">def</span> <span class="nf">remove_element</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">for</span> <span class="n">p1</span> <span class="k">in</span> <span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="p">.</span><span class="nf">nums</span><span class="p">.</span><span class="nf">size</span>
+      <span class="n">e</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span>
+      
+      <span class="k">if</span> <span class="n">e</span> <span class="o">==</span> <span class="n">v</span> <span class="k">then</span>
+          <span class="k">next</span>
+      <span class="k">end</span>
+      
+      <span class="k">if</span> <span class="n">p1</span> <span class="o">!=</span> <span class="n">p2</span> <span class="k">then</span>
+          <span class="n">nums</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span>
+      <span class="k">end</span>
+      <span class="n">p2</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">end</span>
+  <span class="n">p2</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+<p>提交的结果是72ms，还有一个更快地68ms…迷茫，我们再去看看答案</p>
+
+<h2 id="处理rare-value的更efficient的方法">处理Rare Value的更efficient的方法</h2>
+<p>答案给出了一种交换法，其实跟一开始的思想差不多，毕竟题目上让在原Array操作，把要删除的item和末位元素交换，当然交换回来的元素很有可能还是要删除的item，不过下次循环的时候只是把末尾指针前移，直到交换回来的不是那个item，这样不需要把所有元素都移动一遍，只需要处理仅有的item，按需处理。这里再重新写一下这个解法</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># @param {Integer[]} nums</span>
+<span class="c1"># @param {Integer} val</span>
+<span class="c1"># @return {Integer}</span>
+<span class="k">def</span> <span class="nf">remove_element</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+  <span class="n">tail_ptr</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="nf">size</span> <span class="o">-</span> <span class="mi">1</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">tail_ptr</span> <span class="k">do</span> 
+    <span class="n">cur_val</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">cur_val</span> <span class="o">==</span> <span class="n">val</span> <span class="k">then</span>
+      <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">tail_ptr</span><span class="p">]</span>
+      <span class="n">tail_ptr</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">else</span>
+      <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="n">tail_ptr</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+<p>这段代码里值得注意的是，<strong>while的循环条件其实是当两个<em>指针</em>相遇的时候</strong></p>
+
+<h2 id="终极疑问">终极疑问</h2>
+<p>然后submit,喵的比前一个还慢，变成80ms了是什么鬼样子！！</p>
+
+<p>去掉一个取值操作…更慢了，变成了88ms，此时我已经崩溃，猜测是lc的问题，此题记住这几个思想也够了…再看看别人的答案吧</p>
+
+<ul>
+  <li>这几个解答都没有注意边界条件</li>
+  <li>以后再补充吧</li>
+</ul>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-344-reverse-string/">LeetCode 344 Reverse String
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-26-remove-duplicates/">LeetCode 26 Remove Duplicates from Sorted Array
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-111-minimum-depth/">LeetCode 111 Minimum Depth of Binary Tree
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-102-level-traversal/">LeetCode 102 Binary Tree Level Order Traversal
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/algo-level-traversal-tree/">Level-order Traverse Binary Tree
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/12/17/lc-26-remove-duplicates/">LeetCode 26 Remove Duplicates from Sorted Array</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2016/12/17/lc-344-reverse-string/">LeetCode 344 Reverse String</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function() {
+        this.page.url = 'http://localhost:4000/2016/12/17/lc-27-remove-element/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://localhost:4000/2016/12/17/lc-27-remove-element/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+
+        s.src = '//dreamark.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+             Sapere Aude 
+        </p>
+        <br>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/LittleNoah" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:jiaweili_cmu@outlook.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+        </p>
+        <!-- <p>本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次</p> -->
+        
+        <p class="power">
+            <span>
+                Powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Modified from Theme <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" class="scroll">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/scroll.min.js " charset="utf-8"></script>
+  </body>
+
+</html>

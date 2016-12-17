@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DreamArk</title>
+    <description></description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 17 Dec 2016 02:21:40 -0500</pubDate>
+    <lastBuildDate>Sat, 17 Dec 2016 02:21:40 -0500</lastBuildDate>
+    <generator>Jekyll v3.3.1</generator>
+    
+      <item>
+        <title>LeetCode 344 Reverse String</title>
+        <description>
+LeetCode 344 Reverse String
+
+&lt;img src=&quot;http://www.favicon.cc/logo3d/818131.png&quot; alt=&quot;&quot; /&gt;
+
+</description>
+        <pubDate>Sat, 17 Dec 2016 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2016/12/17/lc-344-reverse-string/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/17/lc-344-reverse-string/</guid>
+        
+        <category>LeetCode</category>
+        
+        <category>Array</category>
+        
+        <category>String</category>
+        
+        
+        <category>LeetCode</category>
+        
+      </item>
+    
+      <item>
+        <title>LeetCode 27 Remove Element</title>
+        <description>
+LeetCode 27 Remove Element
+
+&lt;img src=&quot;http://www.favicon.cc/logo3d/818131.png&quot; alt=&quot;&quot; /&gt;
+
+</description>
+        <pubDate>Sat, 17 Dec 2016 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2016/12/17/lc-27-remove-element/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/17/lc-27-remove-element/</guid>
+        
+        <category>LeetCode</category>
+        
+        <category>Array</category>
+        
+        
+        <category>LeetCode</category>
+        
+      </item>
+    
+      <item>
+        <title>LeetCode 26 Remove Duplicates from Sorted Array</title>
+        <description>
+LeetCode 26 Remove Duplicates from Sorted Array
+
+&lt;img src=&quot;http://www.favicon.cc/logo3d/818131.png&quot; alt=&quot;&quot; /&gt;
+
+</description>
+        <pubDate>Sat, 17 Dec 2016 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2016/12/17/lc-26-remove-duplicates/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/17/lc-26-remove-duplicates/</guid>
+        
+        <category>LeetCode</category>
+        
+        <category>Array</category>
+        
+        
+        <category>LeetCode</category>
+        
+      </item>
+    
+      <item>
+        <title>LeetCode 111 Minimum Depth of Binary Tree</title>
+        <description>
+Given a binary tree, find its minimum depth.
+
+&lt;img src=&quot;http://www.favicon.cc/logo3d/818131.png&quot; alt=&quot;&quot; /&gt;
+
+</description>
+        <pubDate>Sat, 17 Dec 2016 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2016/12/17/lc-111-minimum-depth/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/17/lc-111-minimum-depth/</guid>
+        
+        <category>LeetCode</category>
+        
+        <category>Array</category>
+        
+        <category>Traverse</category>
+        
+        <category>Tree</category>
+        
+        
+        <category>LeetCode</category>
+        
+      </item>
+    
+      <item>
+        <title>LeetCode 102 Binary Tree Level Order Traversal</title>
+        <description>
+LeetCode 102 Binary Tree Level Order Traversal.
+
+&lt;img src=&quot;http://www.favicon.cc/logo3d/818131.png&quot; alt=&quot;&quot; /&gt;
+
+</description>
+        <pubDate>Sat, 17 Dec 2016 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2016/12/17/lc-102-level-traversal/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/17/lc-102-level-traversal/</guid>
+        
+        <category>LeetCode</category>
+        
+        <category>Array</category>
+        
+        <category>Traverse</category>
+        
+        <category>Tree</category>
+        
+        
+        <category>LeetCode</category>
+        
+      </item>
+    
+      <item>
+        <title>First Post in Jekyll</title>
+        <description>
+用Jekyll搭的Blog的第一个Post，比较喜欢这个Theme的Table of Content!
+
+&lt;img src=&quot;http://www.favicon.cc/logo3d/818131.png&quot; alt=&quot;&quot; /&gt;
+
+</description>
+        <pubDate>Sat, 17 Dec 2016 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2016/12/17/first-post/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/17/first-post/</guid>
+        
+        <category>uncategorized</category>
+        
+        
+        <category>Others</category>
+        
+      </item>
+    
+      <item>
+        <title>Level-order Traverse Binary Tree</title>
+        <description>
+层序遍历二叉树的方法总结
+
+&lt;img src=&quot;http://www.favicon.cc/logo3d/818131.png&quot; alt=&quot;&quot; /&gt;
+
+</description>
+        <pubDate>Sat, 17 Dec 2016 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2016/12/17/algo-level-traversal-tree/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/17/algo-level-traversal-tree/</guid>
+        
+        <category>LeetCode</category>
+        
+        <category>Array</category>
+        
+        <category>Traverse</category>
+        
+        
+        <category>LeetCode</category>
+        
+        <category>Algorithm</category>
+        
+      </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>LeetCode 102 Binary Tree Level Order Traversal</title>
+    <meta name="description" content="LeetCode 102 Binary Tree Level Order Traversal.">
+
+    <link rel="shortcut icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://localhost:4000/2016/12/17/lc-102-level-traversal/">
+    <link rel="alternate" type="application/rss+xml" title="DreamArk" href="http://localhost:4000/feed.xml ">
+
+
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">DreamArk</a>
+        <small>MSIT-SE Student in CMU</small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>Home
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>Archives
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>Categories
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>Tags
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>Collections
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>About
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>LeetCode 102 Binary Tree Level Order Traversal</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-12-17
+            </div>
+
+            <div class="label-card">
+                <i class="fa fa-user"></i>氯甲烷
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#LeetCode" title="Category: LeetCode" rel="category">LeetCode</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#LeetCode" title="Tag: LeetCode" rel="tag">LeetCode</a-->
+        <a href="/tag/#LeetCode" title="Tag: LeetCode" rel="tag">LeetCode</a>&nbsp;
+    
+        <!--a href="/tag/#Array" title="Tag: Array" rel="tag">Array</a-->
+        <a href="/tag/#Array" title="Tag: Array" rel="tag">Array</a>&nbsp;
+    
+        <!--a href="/tag/#Traverse" title="Tag: Traverse" rel="tag">Traverse</a-->
+        <a href="/tag/#Traverse" title="Tag: Traverse" rel="tag">Traverse</a>&nbsp;
+    
+        <!--a href="/tag/#Tree" title="Tag: Tree" rel="tag">Tree</a-->
+        <a href="/tag/#Tree" title="Tag: Tree" rel="tag">Tree</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#102-binary-tree-level-order-traversal" id="markdown-toc-102-binary-tree-level-order-traversal">102 Binary Tree Level Order Traversal</a>    <ul>
+      <li><a href="#1-frist-draft-code" id="markdown-toc-1-frist-draft-code">1. Frist Draft Code</a></li>
+      <li><a href="#2-first-ac-code" id="markdown-toc-2-first-ac-code">2. First AC Code</a></li>
+      <li><a href="#3-其他层次遍历方法" id="markdown-toc-3-其他层次遍历方法">3. 其他层次遍历方法</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>LeetCode 102 Binary Tree Level Order Traversal.</p>
+
+<p><img src="http://www.favicon.cc/logo3d/818131.png" alt="" /></p>
+
+<h1 id="102-binary-tree-level-order-traversal">102 Binary Tree Level Order Traversal</h1>
+
+<h2 id="1-frist-draft-code">1. Frist Draft Code</h2>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">level_order</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+  <span class="n">sign</span> <span class="o">=</span> <span class="no">TreeNode</span><span class="p">.</span><span class="nf">new</span> <span class="mi">0</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">root</span>
+  <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">sign</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">result</span><span class="p">.</span><span class="nf">push</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="k">unless</span> <span class="n">root</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="n">tmp_list</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">while</span> <span class="n">q</span><span class="p">.</span><span class="nf">size</span> <span class="o">!=</span> <span class="mi">0</span>
+    <span class="n">cur_node</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">shift</span>
+    <span class="k">if</span> <span class="n">cur_node</span> <span class="o">!=</span> <span class="n">sign</span>
+      <span class="k">unless</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span>
+        <span class="n">tmp_list</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">left</span> 
+        <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">left</span>
+      <span class="k">end</span>
+      <span class="k">unless</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span>
+        <span class="n">tmp_list</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">right</span>
+        <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">right</span>
+      <span class="k">end</span>
+    <span class="k">else</span>
+      <span class="n">result</span><span class="p">.</span><span class="nf">push</span> <span class="n">tmp_list</span> <span class="k">unless</span> <span class="n">tmp_list</span><span class="p">.</span><span class="nf">size</span> <span class="o">==</span> <span class="mi">0</span>
+      <span class="n">tmp_list</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">new</span>
+      <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">q</span><span class="p">.</span><span class="nf">size</span> <span class="o">==</span> <span class="mi">0</span>
+      <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">sign</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>挺奇怪的，在RubyMine中运行结果正确…LeetCode就不行了？</p>
+
+<h2 id="2-first-ac-code">2. First AC Code</h2>
+
+<p>MDZZ,原来是因为返回结果要的类型是value值，我把TreeNode传进去了，被浪费的生命啊，下面是使用Magic Node的解法，<strong>这种解法遇到每层只有一个的节点的情况开销很大，我们看下leetcode和discuss的方法吧…有什么其他的层次遍历方法呢</strong></p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">level_order</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+  <span class="k">return</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">root</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="n">sign</span> <span class="o">=</span> <span class="no">TreeNode</span><span class="p">.</span><span class="nf">new</span> <span class="mi">0</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">root</span>
+  <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">sign</span>
+  <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">ans</span><span class="p">.</span><span class="nf">push</span> <span class="p">[</span><span class="n">root</span><span class="p">.</span><span class="nf">val</span><span class="p">,]</span>
+  <span class="n">tmp_list</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">while</span> <span class="n">q</span><span class="p">.</span><span class="nf">size</span> <span class="o">!=</span> <span class="mi">0</span>
+    <span class="n">cur_node</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="nf">shift</span>
+    <span class="k">if</span> <span class="n">cur_node</span> <span class="o">!=</span> <span class="n">sign</span>
+      <span class="k">unless</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">nil?</span>
+        <span class="n">tmp_list</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">left</span><span class="p">.</span><span class="nf">val</span> 
+        <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">left</span>
+      <span class="k">end</span>
+      <span class="k">unless</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">nil?</span>
+        <span class="n">tmp_list</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">right</span><span class="p">.</span><span class="nf">val</span>
+        <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">cur_node</span><span class="p">.</span><span class="nf">right</span>
+      <span class="k">end</span>
+    <span class="k">else</span>
+      <span class="n">ans</span><span class="p">.</span><span class="nf">push</span> <span class="n">tmp_list</span> <span class="k">unless</span> <span class="n">tmp_list</span><span class="p">.</span><span class="nf">size</span> <span class="o">==</span> <span class="mi">0</span>
+      <span class="n">tmp_list</span> <span class="o">=</span> <span class="no">Array</span><span class="p">.</span><span class="nf">new</span>
+      <span class="k">return</span> <span class="n">ans</span> <span class="k">if</span> <span class="n">q</span><span class="p">.</span><span class="nf">size</span> <span class="o">==</span> <span class="mi">0</span>
+      <span class="n">q</span><span class="p">.</span><span class="nf">push</span> <span class="n">sign</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h2 id="3-其他层次遍历方法">3. 其他层次遍历方法</h2>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-344-reverse-string/">LeetCode 344 Reverse String
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-27-remove-element/">LeetCode 27 Remove Element
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-26-remove-duplicates/">LeetCode 26 Remove Duplicates from Sorted Array
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/lc-111-minimum-depth/">LeetCode 111 Minimum Depth of Binary Tree
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="http://localhost:4000/2016/12/17/algo-level-traversal-tree/">Level-order Traverse Binary Tree
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/12/17/first-post/">First Post in Jekyll</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2016/12/17/lc-111-minimum-depth/">LeetCode 111 Minimum Depth of Binary Tree</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    var disqus_config = function() {
+        this.page.url = 'http://localhost:4000/2016/12/17/lc-102-level-traversal/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://localhost:4000/2016/12/17/lc-102-level-traversal/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document,
+            s = d.createElement('script');
+
+        s.src = '//dreamark.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+             Sapere Aude 
+        </p>
+        <br>
+        <p class="contact">
+            Contact me at: 
+            <a href="https://github.com/LittleNoah" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a>  
+            <a href="mailto:jiaweili_cmu@outlook.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>        
+        </p>
+        <!-- <p>本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次</p> -->
+        
+        <p class="power">
+            <span>
+                Powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Modified from Theme <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <div class="back-to-top">
+    <a href="#top" class="scroll">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/scroll.min.js " charset="utf-8"></script>
+  </body>
+
+</html>
