@@ -41,7 +41,7 @@ Honorably graduated from Harbin Institute of Technology, School of Software. <de
 
 ## 友情链接
 
-[FreeCookie](http://yijiajin.github.io) \| 
+[FreeCookie🍪](http://yijiajin.github.io) \| 
 <del>还没啦，以后加</del>
 
 
