@@ -9,7 +9,7 @@
 title: DreamArk
 brief-intro: MSIT-SE Student in CMU
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://dreamark.github.io" # the base hostname & protocol for your site
+url: "https://LittleNoah.github.io" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
 
